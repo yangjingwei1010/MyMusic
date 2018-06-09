@@ -12,6 +12,7 @@ import MediaPlayer
 class QQMusicOperationTool: NSObject {
   
   private var musicModel = QQMusicMessageModel()
+  var artWork : MPMediaItemArtwork?
   
   // 在这里, 保持, 数据的最新状态, 就可以
   // 当前正在播放的歌曲信息
@@ -94,12 +95,37 @@ class QQMusicOperationTool: NSObject {
     let center = MPNowPlayingInfoCenter.default()
     
     //2.给锁屏中心赋值
+    //歌名
     let musicName = musicMessageM.musicM?.name ?? ""
+    //歌手
     let singerName = musicMessageM.musicM?.singer ?? ""
+    //播放时间
     let costTime = musicMessageM.costTime
-    let totalTime = musicMessageM.costTime
+    //总时间
+    let totalTime = musicMessageM.totalTime
+    //图片
     let imageName = musicMessageM.musicM?.icon ?? ""
+    let image = UIImage(named: imageName)
+    if image != nil {
+      artWork = MPMediaItemArtwork(boundsSize: (image?.size)!, requestHandler: { (_) -> UIImage in
+        image!
+      })
+    }
+    let dic: NSMutableDictionary = [
+      MPMediaItemPropertyAlbumTitle: musicName,
+      MPMediaItemPropertyAlbumArtist: singerName,
+      MPMediaItemPropertyPlaybackDuration: totalTime,
+      MPNowPlayingInfoPropertyElapsedPlaybackTime: costTime
+    ]
+    if artWork != nil {
+      dic.setValue(artWork, forKey: MPMediaItemPropertyArtwork)
+    }
     
+    let dictCopy = dic.copy()
+    center.nowPlayingInfo = dictCopy as? [String: AnyObject]
+    
+    //3.接收远程事件
+    UIApplication.shared.beginReceivingRemoteControlEvents()
     
   }
   
