@@ -47,9 +47,10 @@ class QQMusicTool: NSObject {
     }
     do {
       player = try AVAudioPlayer(contentsOf: url)
-      player?.delegate = self as? AVAudioPlayerDelegate
       player?.prepareToPlay()
       player?.play()
+      player?.delegate = self
+      
     } catch {
       print(error)
       return
@@ -60,7 +61,7 @@ class QQMusicTool: NSObject {
   }
 }
 
-extension QQImageTool: AVAudioPlayerDelegate {
+extension QQMusicTool: AVAudioPlayerDelegate {
   func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
     print("播放完成")
     NotificationCenter.default.post(name: Notification.Name(kPlayFinishNotification), object: nil)

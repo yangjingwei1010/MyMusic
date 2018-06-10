@@ -100,8 +100,6 @@ class QQMusicDataTool: NSObject {
     let nextLrcM = resultMs[i + 1]
     lrcM.endTime = nextLrcM.beginTime
   }
-    
-    print(resultMs)
     // 4. 返回结果
     return resultMs
     

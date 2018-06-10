@@ -7,6 +7,7 @@
 //
 
 import UIKit
+
 // 存放属性
 class QQDetailViewController: UIViewController {
 /** 歌词动画背景 */

@@ -21,7 +21,7 @@ class QQMusicOperationTool: NSObject {
   func getMusicMessageModel() -> QQMusicMessageModel {
     musicModel.musicM = musicMs[currentPlayIndex]
     musicModel.costTime = (tool.player?.currentTime) ?? 0
-    print(musicModel.costTime)
+    print("costTime:\(musicModel.costTime)")
     musicModel.totalTime = (tool.player?.duration) ?? 0
     
     musicModel.isPlaying = (tool.player?.isPlaying) ?? false
