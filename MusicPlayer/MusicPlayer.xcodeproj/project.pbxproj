@@ -73,6 +73,9 @@
 		6A7A925220A917810080A3F4 /* QQLrcLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7A925120A917810080A3F4 /* QQLrcLabel.swift */; };
 		6A7A925520A917AF0080A3F4 /* QQLrcCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7A925320A917AF0080A3F4 /* QQLrcCell.swift */; };
 		6A7A925620A917AF0080A3F4 /* QQLrcCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A7A925420A917AF0080A3F4 /* QQLrcCell.xib */; };
+		6A919F4020CBD80A0035549D /* QQImageTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A919F3F20CBD80A0035549D /* QQImageTool.swift */; };
+		6A919F4220CD12C10035549D /* QQDetailViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A919F4120CD12C10035549D /* QQDetailViewController.storyboard */; };
+		6A919F4420CD13480035549D /* QQListViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A919F4320CD13480035549D /* QQListViewController.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -164,6 +167,9 @@
 		6A7A925120A917810080A3F4 /* QQLrcLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QQLrcLabel.swift; sourceTree = "<group>"; };
 		6A7A925320A917AF0080A3F4 /* QQLrcCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QQLrcCell.swift; sourceTree = "<group>"; };
 		6A7A925420A917AF0080A3F4 /* QQLrcCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QQLrcCell.xib; sourceTree = "<group>"; };
+		6A919F3F20CBD80A0035549D /* QQImageTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QQImageTool.swift; sourceTree = "<group>"; };
+		6A919F4120CD12C10035549D /* QQDetailViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = QQDetailViewController.storyboard; sourceTree = "<group>"; };
+		6A919F4320CD13480035549D /* QQListViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = QQListViewController.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -309,6 +315,7 @@
 			isa = PBXGroup;
 			children = (
 				6A231040209DFDDF00BEE086 /* QQDetailViewController.swift */,
+				6A919F4120CD12C10035549D /* QQDetailViewController.storyboard */,
 				6A10CE1820A12FF90002933E /* QQLrcTableViewController.swift */,
 			);
 			path = Controller;
@@ -354,6 +361,7 @@
 			isa = PBXGroup;
 			children = (
 				6A23103E209DFDC400BEE086 /* QQListViewController.swift */,
+				6A919F4320CD13480035549D /* QQListViewController.storyboard */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -364,6 +372,7 @@
 				6A23104F209EAB2D00BEE086 /* QQMusicOperationTool.swift */,
 				6A231051209EAB4000BEE086 /* QQMusicTool.swift */,
 				6A231053209EF3BF00BEE086 /* QQTimeTool.swift */,
+				6A919F3F20CBD80A0035549D /* QQImageTool.swift */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -570,6 +579,7 @@
 				6A230FA7209DF40000BEE086 /* LaunchScreen.storyboard in Resources */,
 				6A231013209DFBE900BEE086 /* jay@2x.jpg in Resources */,
 				6A23101C209DFBE900BEE086 /* wf_icon@2x.jpg in Resources */,
+				6A919F4220CD12C10035549D /* QQDetailViewController.storyboard in Resources */,
 				6A231020209DFBE900BEE086 /* eason@2x.jpg in Resources */,
 				6A231014209DFBE900BEE086 /* lkq_icon@2x.jpg in Resources */,
 				6A231032209DFBE900BEE086 /* 255319.lrc in Resources */,
@@ -605,6 +615,7 @@
 				6A231012209DFBE900BEE086 /* wf@2x.jpg in Resources */,
 				6A231037209DFBE900BEE086 /* 12309111.lrc in Resources */,
 				6A23101D209DFBE900BEE086 /* eason_icon@2x.jpg in Resources */,
+				6A919F4420CD13480035549D /* QQListViewController.storyboard in Resources */,
 				6A231021209DFBE900BEE086 /* jj_icon@2x.png in Resources */,
 				6A231024209DFBE900BEE086 /* zxy_icon@2x.jpg in Resources */,
 				6A23102E209DFBE900BEE086 /* 12309111.mp3 in Resources */,
@@ -644,6 +655,7 @@
 				6A7A925220A917810080A3F4 /* QQLrcLabel.swift in Sources */,
 				6A633F2720A010FF009462EB /* CALayer+sz.swift in Sources */,
 				6A633F18209FF8F4009462EB /* QQLrcModel.swift in Sources */,
+				6A919F4020CBD80A0035549D /* QQImageTool.swift in Sources */,
 				6A231054209EF3BF00BEE086 /* QQTimeTool.swift in Sources */,
 				6A23103F209DFDC400BEE086 /* QQListViewController.swift in Sources */,
 				6A231052209EAB4000BEE086 /* QQMusicTool.swift in Sources */,
@@ -828,12 +840,14 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = S6W7TXYNQR;
 				INFOPLIST_FILE = MusicPlayer/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = fist.MusicPlayer;
+				PRODUCT_BUNDLE_IDENTIFIER = com.firstleap.juswill.music;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
@@ -848,12 +862,14 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = S6W7TXYNQR;
 				INFOPLIST_FILE = MusicPlayer/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = fist.MusicPlayer;
+				PRODUCT_BUNDLE_IDENTIFIER = com.firstleap.juswill.music;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

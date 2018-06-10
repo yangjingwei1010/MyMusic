@@ -11,6 +11,8 @@ import MediaPlayer
 
 class QQMusicOperationTool: NSObject {
   
+  var lastRow = -1
+  
   private var musicModel = QQMusicMessageModel()
   var artWork : MPMediaItemArtwork?
   
@@ -106,9 +108,24 @@ class QQMusicOperationTool: NSObject {
     //图片
     let imageName = musicMessageM.musicM?.icon ?? ""
     let image = UIImage(named: imageName)
-    if image != nil {
-      artWork = MPMediaItemArtwork(boundsSize: (image?.size)!, requestHandler: { (_) -> UIImage in
-        image!
+    
+    //1.获取当前正在播放的歌词
+    let lrcFileName = musicMessageM.musicM?.lrcname
+    let lrcMs = QQMusicDataTool.getLrcMs(lrcName: lrcFileName)
+    let lrcMRow = QQMusicDataTool.getCurrentLrcM(currentTime: musicMessageM.costTime, lrcMs: lrcMs)
+    let lrcM = lrcMRow.lrcM
+    
+    //2.绘制到图片，生产一个新的突破
+    var resultImage: UIImage?
+    if lastRow != lrcMRow.row {
+      lastRow = lrcMRow.row
+      resultImage = QQImageTool.getNewImage(sourceImage: image, str: lrcM?.lrcContent)
+    }
+    
+    //3.设置专辑图片
+    if resultImage != nil {
+      artWork = MPMediaItemArtwork(boundsSize: (resultImage?.size)!, requestHandler: { (_) -> UIImage in
+        resultImage!
       })
     }
     let dic: NSMutableDictionary = [
@@ -127,6 +144,10 @@ class QQMusicOperationTool: NSObject {
     //3.接收远程事件
     UIApplication.shared.beginReceivingRemoteControlEvents()
     
+  }
+  
+  func seekToTime(time: TimeInterval) {
+    tool.seekToTime(time: time)
   }
   
 }

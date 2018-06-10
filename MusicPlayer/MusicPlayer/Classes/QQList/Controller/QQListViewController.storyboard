@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="HKp-gc-j7X">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--List View Controller-->
+        <scene sceneID="wbe-hx-RnX">
+            <objects>
+                <tableViewController id="HKp-gc-j7X" customClass="QQListViewController" customModule="MusicPlayer" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="fSf-qe-c8r">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <connections>
+                            <outlet property="dataSource" destination="HKp-gc-j7X" id="8Xh-OM-PmP"/>
+                            <outlet property="delegate" destination="HKp-gc-j7X" id="c9O-t8-nit"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="Q8v-6R-ehF"/>
+                    <connections>
+                        <segue destination="0cV-Wa-e6v" kind="show" identifier="listToDetail" id="Wcq-9b-STJ"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fMc-TH-BqT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-116" y="25"/>
+        </scene>
+        <!--QQDetailViewController-->
+        <scene sceneID="yG4-b4-KtK">
+            <objects>
+                <viewControllerPlaceholder storyboardName="QQDetailViewController" id="0cV-Wa-e6v" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="c1A-sh-ZMJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="788" y="51.724137931034484"/>
+        </scene>
+    </scenes>
+</document>

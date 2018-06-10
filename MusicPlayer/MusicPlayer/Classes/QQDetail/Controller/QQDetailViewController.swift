@@ -42,6 +42,10 @@ class QQDetailViewController: UIViewController {
   // 负责更新歌词的link，实现实时的更新，timer完成不了这个功能
   var updateLrcLink: CADisplayLink?
   
+  deinit {
+    NotificationCenter.default.removeObserver(self)
+  }
+  
 }
 // 业务逻辑
 extension QQDetailViewController {
@@ -76,6 +80,8 @@ extension QQDetailViewController {
     setSlider()
     
      /** 注意: 以上涉及到的控件布局, 都是在另外一个方法viewWillLayoutSubviews */
+    
+    NotificationCenter.default.addObserver(self, selector: #selector(QQDetailViewController.nextMusic), name: NSNotification.Name(rawValue: kPlayFinishNotification), object: nil)
   }
   
   // 执行多次更新方法的定时器
@@ -99,6 +105,61 @@ extension QQDetailViewController {
   func removeLink() {
     updateLrcLink?.invalidate()
     updateLrcLink = nil
+  }
+  
+  @IBAction func tap(sender: UITapGestureRecognizer) {
+    print("tap")
+    //获取手指在slider上的x
+    let point = sender.location(in: sender.view)
+    let x = point.x
+    
+    let value = x / (sender.view?.width)!
+    progressSlider.value = Float(value)
+    
+    //修改播放时间，设置歌曲播放的某个时间点
+    let musicMessegeM = QQMusicOperationTool.shareInstance.getMusicMessageModel()
+    let totalTime = musicMessegeM.totalTime
+    //计算已经播放的时长
+    let costTime = totalTime * TimeInterval(value)
+    
+    //设置歌曲播放到对应的时间点
+    QQMusicOperationTool.shareInstance.seekToTime(time: costTime)
+    
+  }
+  @objc func touchDown() {
+    // 移除timer
+    removeTimer()
+    
+  }
+  @objc func touchUp() {
+  //添加timer
+    addTimer()
+    //设置歌曲播放某个时间点
+    let value = progressSlider.value
+    //获取总时长
+    let musicMessageM = QQMusicOperationTool.shareInstance.getMusicMessageModel()
+    let totalTime = musicMessageM.totalTime
+    
+    //计算已经播发的时长
+    let costTime = totalTime * TimeInterval(value)
+   //设置歌曲播放到对应的时间点
+    QQMusicOperationTool.shareInstance.seekToTime(time: costTime)
+    
+  }
+  
+  @objc func valueChange() {
+    // 修改已经播放的时间
+    
+    // 0.0 - 1.0
+    let value = progressSlider.value
+    
+    //获取总时长
+    let musicMessageM = QQMusicOperationTool.shareInstance.getMusicMessageModel()
+    let totalTime = musicMessageM.totalTime
+    let costTime = totalTime * TimeInterval(value)
+    let timeStr = QQTimeTool.getFormatTime(timeInterval: costTime)
+    costTimeLabel.text = timeStr
+    
   }
   
   // 关闭控制器
@@ -212,6 +273,11 @@ extension QQDetailViewController {
     let row = rowLrcM.row
     // 赋值lrcVC, 让它来负责具体怎么滚
     lrcVC.scrollRow = row
+    //进入后台才进行锁屏设置
+    if UIApplication.shared.applicationState == .background {
+      //锁屏
+      QQMusicOperationTool.shareInstance.setupLockMessage()
+    }
   }
 }
 
@@ -229,6 +295,10 @@ extension QQDetailViewController {
   // 设置进度条图标
   func setSlider() {
     progressSlider.setThumbImage(UIImage(named: "player_slider_playback_thumb"), for: UIControlState.normal)
+    
+    progressSlider.addTarget(self, action: #selector(QQDetailViewController.touchDown), for: .touchDown)
+    progressSlider.addTarget(self, action: #selector(QQDetailViewController.touchUp), for: .touchUpInside)
+    progressSlider.addTarget(self, action: #selector(QQDetailViewController.valueChange), for: .valueChanged)
   }
   // 设置前景图片的圆角效果
   func setupForeImageView() {
@@ -303,5 +373,36 @@ extension QQDetailViewController: UIScrollViewDelegate {
   //继续旋转动画
   func resumeRotationAnimation() {
     foreImageView.layer.resumeAnimation()
+  }
+}
+
+extension QQDetailViewController {
+  //锁屏界面远程控制
+  override func remoteControlReceived(with event: UIEvent?) {
+    let type = event?.subtype
+    switch type! {
+    case .remoteControlPlay:
+      print("播放")
+      QQMusicOperationTool.shareInstance.playCurrentMusic()
+    case .remoteControlPause:
+      print("暂停")
+      QQMusicOperationTool.shareInstance.pauseCurrentMusic()
+    case .remoteControlNextTrack:
+      print("下一首")
+      QQMusicOperationTool.shareInstance.nextMusic()
+    case .remoteControlPreviousTrack:
+      print("上一首")
+      QQMusicOperationTool.shareInstance.preMusic()
+    default:
+      print("错误")
+    }
+    setupOnce()
+    
+  }
+  
+  //摇一摇下一首
+  override func motionBegan(_ motion: UIEventSubtype, with event: UIEvent?) {
+    QQMusicOperationTool.shareInstance.nextMusic()
+    setupOnce()
   }
 }

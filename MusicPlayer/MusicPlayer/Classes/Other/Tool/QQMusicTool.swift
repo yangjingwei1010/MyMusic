@@ -10,6 +10,8 @@
 import UIKit
 import AVFoundation
 
+let kPlayFinishNotification = "playFinish"
+
 class QQMusicTool: NSObject {
   
   override init() {
@@ -31,6 +33,10 @@ class QQMusicTool: NSObject {
   
   var player: AVAudioPlayer?
   
+  func seekToTime(time: TimeInterval) {
+    player?.currentTime = time
+  }
+  
   func playMusic(musicName: String?) {
     guard let url = Bundle.main.url(forResource: musicName, withExtension: nil) else {
       return
@@ -41,6 +47,7 @@ class QQMusicTool: NSObject {
     }
     do {
       player = try AVAudioPlayer(contentsOf: url)
+      player?.delegate = self as? AVAudioPlayerDelegate
       player?.prepareToPlay()
       player?.play()
     } catch {
@@ -50,5 +57,12 @@ class QQMusicTool: NSObject {
   }
   func pauseMusic() {
     player?.pause()
+  }
+}
+
+extension QQImageTool: AVAudioPlayerDelegate {
+  func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+    print("播放完成")
+    NotificationCenter.default.post(name: Notification.Name(kPlayFinishNotification), object: nil)
   }
 }
