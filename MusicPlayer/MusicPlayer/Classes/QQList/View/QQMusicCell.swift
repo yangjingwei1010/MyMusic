@@ -62,7 +62,10 @@ class QQMusicCell: UITableViewCell {
       animation.duration = 0.2
       animation.repeatCount = 2
       self.layer.add(animation, forKey: "scale")
+      break
     default:
+      self.layer.removeAnimation(forKey: "Transition")
+      
       break
     }
   }

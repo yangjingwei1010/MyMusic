@@ -90,7 +90,6 @@ extension QQDetailViewController {
     timer = Timer(timeInterval: 1, target: self, selector: #selector(QQDetailViewController.setupTimes), userInfo: nil, repeats: true)
     RunLoop.current.add(timer!, forMode: RunLoopMode.commonModes)
   }
-  
   // 移除定时器
   func removeTimer() {
     timer?.invalidate()

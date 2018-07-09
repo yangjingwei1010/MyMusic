@@ -20,6 +20,7 @@ class QQListViewController: UITableViewController {
         super.viewDidLoad()
       // 界面处理
       setupUI()
+      
       // 取出数据
       QQMusicDataTool.getMusics { (models: [QQMusicModel]) in
         

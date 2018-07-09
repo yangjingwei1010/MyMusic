@@ -28,7 +28,6 @@ class QQMusicTool: NSObject {
       print(error)
       return
     }
-    
   }
   
   var player: AVAudioPlayer?
